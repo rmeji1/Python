@@ -97,5 +97,3 @@ else:
             print("Found at: ",i,"\n", quote);
 
 
-
-

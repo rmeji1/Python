@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 
 data_list=["And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.",
            "All grown-ups were once children... but only few of them remember it.",
@@ -82,22 +83,55 @@ data_list=["And now here is my secret, a very simple secret: It is only with the
            "Will you draw me a sheep?",
            "It's good to have a friend. Even if you're going to die.",
            "If you love a flower that lives on a star, then it's good at night, to look up at the sky. All the stars are blossoming."]
+# ------------------------------------------------------------------------------
+# Function that does the preprocessing
+def getDict() :
+    dict = {} ;
+    for i,line in enumerate(data_list): # get each line from the data_list
+        line = line.split() ;
+        for word in line:           #get each word from the line and add to dict
+            if word in dict:
+                dict[word].append(i) ;
+            else:
+                dict[word] = [i] ;
+    return dict ;
+# ------------------------------------------------------------------------------
+# Function that will get input query
+def getQuery( ) :
+    query=input("query:");
+    query = set(query.split()) ;
+    return query ;
 
+# ------------------------------------------------------------------------------
+# Start of application
+dict = getDict() ; # -------------------------------------------Do preprocessing
+query = getQuery() ;
+lists = [] ;
+dt1 = datetime.now() ; # --------------------------------------Record start time
+starttime = time.time() ;
 
-query=input("query:");
-query = set(query.split()) ;
-dt1 = datetime.now()
 if "or" in query and "and" not in query:
-    query.remove("or") ;
-    for i,quote in enumerate(data_list):
-        if any(word in quote for word in query):
-            print("Found at: ",i,"\n", quote);
+    query.remove("or") ; # ---------------------------- remove or from the query
+    # for every word in the query check if the word is a key for dictionary,
+    # if so append list to the current list.
+    for word in query:
+        if word in dict:
+            lists = lists + dict[word] ;
+    # print(set(lists)) ;
+    # print out the lists
+    for index in lists :
+        print(data_list[index]) ;
 else:
     if "and" in query:
         query.remove("and") ;
-    for i,quote in enumerate(data_list):
-        if all(word in quote for word in query):
-            print("Found at: ",i,"\n", quote);
+    for word in query:
+        if word in dict:
+            lists.append(set(dict[word]))
+            results = set(lists[0]).intersection(*lists)
+    print(results)
+    for result in results:
+        print(data_list[result]) ;
 
 dt2= datetime.now()
+print("Execution time", (time.time() - starttime) * 1000, "microseconds" ) ;
 print("Execution time:", dt2.microsecond-dt1.microsecond);
