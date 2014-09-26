@@ -84,7 +84,7 @@ data_list=["And now here is my secret, a very simple secret: It is only with the
 
 query=input("query:");
 query = set(query.split()) ;
-if "or" in query:
+if "or" in query and "and" not in query:
     query.remove("or") ;
     for i,quote in enumerate(data_list):
         if any(word in quote for word in query):

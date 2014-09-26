@@ -1,5 +1,4 @@
 from datetime import datetime
-dt1 = datetime.now()
 
 data_list=["And now here is my secret, a very simple secret: It is only with the heart that one can see rightly; what is essential is invisible to the eye.",
            "All grown-ups were once children... but only few of them remember it.",
@@ -87,7 +86,8 @@ data_list=["And now here is my secret, a very simple secret: It is only with the
 
 query=input("query:");
 query = set(query.split()) ;
-if "or" in query:
+dt1 = datetime.now()
+if "or" in query and "and" not in query:
     query.remove("or") ;
     for i,quote in enumerate(data_list):
         if any(word in quote for word in query):
@@ -100,4 +100,4 @@ else:
             print("Found at: ",i,"\n", quote);
 
 dt2= datetime.now()
-print("Execution time:", dt2.microsecond-dt1.microsecond)break
+print("Execution time:", dt2.microsecond-dt1.microsecond);
