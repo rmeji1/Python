@@ -88,12 +88,16 @@ data_list=["And now here is my secret, a very simple secret: It is only with the
 def getDict() :
     dict = {} ;
     for i,line in enumerate(data_list): # get each line from the data_list
+        line = line.replace(',', '');
+        line = line.replace('.','');
         line = line.split() ;
+        line = set(line) ;
         for word in line:           #get each word from the line and add to dict
             if word in dict:
                 dict[word].append(i) ;
             else:
                 dict[word] = [i] ;
+    #print(dict) ;
     return dict ;
 # ------------------------------------------------------------------------------
 # Function that will get input query
@@ -108,30 +112,26 @@ dict = getDict() ; # -------------------------------------------Do preprocessing
 query = getQuery() ;
 lists = [] ;
 dt1 = datetime.now() ; # --------------------------------------Record start time
-starttime = time.time() ;
-
 if "or" in query and "and" not in query:
     query.remove("or") ; # ---------------------------- remove or from the query
     # for every word in the query check if the word is a key for dictionary,
     # if so append list to the current list.
     for word in query:
         if word in dict:
+            print(dict[word]);
             lists = lists + dict[word] ;
-    # print(set(lists)) ;
-    # print out the lists
-    for index in lists :
-        print(data_list[index]) ;
+    for index in set(lists) :
+        print("Found at", index, data_list[index]) ;
 else:
     if "and" in query:
         query.remove("and") ;
     for word in query:
         if word in dict:
             lists.append(set(dict[word]))
-            results = set(lists[0]).intersection(*lists)
-    print(results)
+    results = set(lists[0]).intersection(*lists) ;
     for result in results:
-        print(data_list[result]) ;
+        print("Found at", result, data_list[result]) ;
 
-dt2= datetime.now()
-print("Execution time", (time.time() - starttime) * 1000, "microseconds" ) ;
+dt2= datetime.now() ;
+#print("Execution time", (time.time() - starttime) * 1000, "microseconds" ) ;
 print("Execution time:", dt2.microsecond-dt1.microsecond);
