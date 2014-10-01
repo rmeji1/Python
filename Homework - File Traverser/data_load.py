@@ -2,7 +2,7 @@
 
 from datetime import datetime
 import time
-from data_list import data_list
+from quotes import data_list
 # ------------------------------------------------------------------------------
 # Function that does the preprocessing
 def getDict() :
