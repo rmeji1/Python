@@ -1,9 +1,12 @@
 #UPS 1z577140YW42419485
 
 from datetime import datetime
-import time
 from quotes import data_list
-import pickle 
+import time
+import os 
+import fnmatch
+import pickle
+
 # ------------------------------------------------------------------------------
 # Function that does the preprocessing
 def getDict() :
@@ -34,12 +37,16 @@ def traverse(start_dir) :
 		for singleFile in files:
 			if fnmatch.fnmatch(singleFile, "*txt") or fnmatch.fnmatch(singleFile, "*log"):
 				absPath = os.path.join(dirPath, singleFile) ;
-				f = open(absPath) ;
-				f = f.read();
-				mDate = time.ctime(os.path.getmtime(absPath));
+				of = open(absPath) ;
+				f = of.read() ;
+				of.close() ;
+				mDate = time.ctime(os.path.getmtime(absPath)) ;
 				size = os.path.getsize(absPath);
 				fileList.append((absPath,f,mDate,size)) ;
 		print(fileList) ;
+	rawData = open("raw_data.pickle", "wb") ;
+	pickle.dump(fileList, rawData) ;
+	rawData.close() ;
 # ------------------------------------------------------------------------------
 # Start of application
 dict = getDict() ; # -------------------------------------------Do preprocessing
