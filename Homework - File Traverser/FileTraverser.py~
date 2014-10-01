@@ -7,7 +7,7 @@ fileList = [] ;
 def traverse(start_dir) :
 	for dirPath, dirs, files in os.walk(start_dir):
 		for singleFile in files:
-			if fnmatch.fnmatch(singleFile, "*txt") or fnmatch.fnmatch(singleFile, "*log"):
+			if fnmatch.fnmatch(singleFile, "*txt") or fnmatch.fnmatch(singleFile, "*log");
 				absPath = os.path.join(dirPath, singleFile) ;
 				f = open(absPath) ;
 				f = f.read();
