@@ -3,6 +3,7 @@
 from datetime import datetime
 import time
 from quotes import data_list
+import pickle 
 # ------------------------------------------------------------------------------
 # Function that does the preprocessing
 def getDict() :
@@ -26,6 +27,19 @@ def getQuery( ) :
     query = set(query.split()) ;
     return query ;
 
+# ------------------------------------------------------------------------------
+# File traverser
+def traverse(start_dir) :
+	for dirPath, dirs, files in os.walk(start_dir):
+		for singleFile in files:
+			if fnmatch.fnmatch(singleFile, "*txt") or fnmatch.fnmatch(singleFile, "*log"):
+				absPath = os.path.join(dirPath, singleFile) ;
+				f = open(absPath) ;
+				f = f.read();
+				mDate = time.ctime(os.path.getmtime(absPath));
+				size = os.path.getsize(absPath);
+				fileList.append((absPath,f,mDate,size)) ;
+		print(fileList) ;
 # ------------------------------------------------------------------------------
 # Start of application
 dict = getDict() ; # -------------------------------------------Do preprocessing
