@@ -1,6 +1,0 @@
-# Ignore files ending in py~
-##########
-*.py~
-
-#Ignore file in __pycache directory
-__pycache__/
