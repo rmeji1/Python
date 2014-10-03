@@ -3,4 +3,4 @@
 *.py~
 
 #Ignore file in __pycache directory
-__pycache__/
+/__pycache__/
