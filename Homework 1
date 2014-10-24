@@ -1,0 +1,56 @@
+# Assignment 1. Created by: Roberto Mejia 
+# -----------------------------------------------------------------------------
+# Validates user input. Must be yes or no
+def validate(condition) :
+	while condition != "yes" and condition != "no" :
+		condition = input("Sorry "+ condition +
+		    " is not a valid input, please enter yes or no. ") ;
+# -------------------------------------------- Declare vars needed for program.
+play = "yes" ; min = 0 ; max = 100 ; 
+guess = 50 ; 
+count = 0 ;
+# ----------------------------------- Get user first name and prompt to start game. 
+name = input("Hi, what is your name ") ;
+print("Hello" ,name, "Let's play a game") ;
+print("Think of random number from 1 to 100, and I'll try to guess it!") ;
+# ------------------------------------------------------------------ Starting game. 
+while play == "yes" :
+	guess = max - (max - min) // 2 ;
+	condition = input("Is it "+ str(guess) + " ?(yes/no) ") ;
+	validate(condition) ; # ---------------------------- Calling validate function.
+	count = count + 1 ;
+	# ----------------------------------------------- Yes, we got the right number.
+	if condition == "yes" :
+		print("Yeey, I got it in", count, "times");
+		play = input("Do you want to play more?(Yes/No)") ;
+		guess = 50 ; # ----- Restart guess to 50
+		min = 0 ; max = 0 ;
+	else :
+		# ------------------------------ No, well ask if its larger than our guess.
+		condition = input("Is it larger than "+ str(guess) + " ?(yes/no) ") ;
+		validate(condition) ; # ------------------------ Calling validate function. 
+		if condition == "yes" :
+			min = guess ;
+		else :
+			max = guess ;
+print("Bye-bye");
+
+''' Output
+	TheBreaksKru:~ robert$ python3 /Users/robert/Desktop/homework1.py
+	Hi, what is your name Roberto
+	Hello Roberto Let's play a game
+	Think of random number from 1 to 100, and I'll try to guess it!
+	Is it 50 ?(yes/no) no
+	Is it larger than 50 ?(yes/no) yes
+	Is it 75 ?(yes/no) no
+	Is it larger than 75 ?(yes/no) yes
+	Is it 88 ?(yes/no) no
+	Is it larger than 88 ?(yes/no) yes
+	Is it 94 ?(yes/no) no
+	Is it larger than 94 ?(yes/no) yes
+	Is it 97 ?(yes/no) yes
+	Yeey, I got it in 5 times
+	Do you want to play more?(Yes/No)no
+	Bye-bye
+	TheBreaksKru:~ robert$ 
+'''
