@@ -45,18 +45,16 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          <th>Gift Name</th>
+          <th>Name</th>
         </tr>
       </thead>
         <tbody>
-            {% for item in data %}  
+            {% for item in data %} 
                 <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                  <td>{{loop.index}}</td>
+                  <td>{{ item[0] }}</td>
+                  <td>{{item[1]}}</td>
                 </tr>
             {% endfor %}
       </tbody>
