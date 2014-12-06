@@ -9,6 +9,7 @@ def getData():
         cursor = conn.cursor()
         result = cursor.execute('SELECT gift, name from gifts')
         data = result.fetchall()
+        conn.close()
     except Exception as e:
         print(type(e))
         print(e)
@@ -22,7 +23,7 @@ def getData():
 def index():
     return render_template('index.html', data = getData());
  
-@app.route('/update', methods=['POST'])
+@app.route('/', methods=['POST'])
 def indexUpdate():
     try:
         conn = sqlite3.connect("final_exam.sqlite")
@@ -32,6 +33,7 @@ def indexUpdate():
         print(name,gift)
         cursor.execute('UPDATE gifts SET name = (?) WHERE gift=(?)', (name,gift))
         conn.commit();
+        conn.close();
     except Exception as e:
         print(type(e))
         print(e)
