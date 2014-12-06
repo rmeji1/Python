@@ -31,13 +31,13 @@
 
     <div class="container">
 
-      <form class="form-signin" role="form">
+      <form class="form-signin" role="form" action="/update" method="POST" >
         <h2 class="form-signin-heading">Please assign a gift</h2>
         <label for="inputEmail" class="sr-only">Gift</label>
-        <input type="text" id="gift" class="form-control" placeholder="gift" required autofocus>
+        <input type="text" id="gift" name="gift" class="form-control" placeholder="gift" required autofocus>
         <label for="inputPassword" class="sr-only">Name</label>
-        <input type="text" id="name" class="form-control" placeholder="name" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <input type="text" id="name" name="name" class="form-control" placeholder="name" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Add to List</button>
       </form>
         
      <table class="table">
