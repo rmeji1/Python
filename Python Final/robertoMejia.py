@@ -4,6 +4,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, render_t
 app = Flask(__name__)
 
 def getData():
+    data = [];
     try:
         conn = sqlite3.connect("final_exam.sqlite")
         cursor = conn.cursor()
